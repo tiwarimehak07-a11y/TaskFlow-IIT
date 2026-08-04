@@ -1,0 +1,181 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+
+/* Sticky Header */
+header {
+    position: sticky;
+    top: 0;
+    padding: 20px;
+    border-bottom: 2px solid #ccc;
+    background-color: white;
+    z-index: 10;
+}
+
+
+header h1 {
+    margin: 0;
+}
+
+
+/* Main Container */
+
+main {
+
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 900px;
+
+}
+
+
+
+/* Sections */
+
+section {
+
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+
+}
+
+
+
+/* Form Styling */
+
+form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}
+
+
+input,
+select,
+button {
+
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 16px;
+
+}
+
+
+button {
+
+    cursor: pointer;
+
+}
+
+
+/* Validation Error */
+
+#titleError {
+    color: red;
+    font-size: 14px;
+}
+
+
+
+/* Task List Container */
+
+#tasks {
+
+    padding: 15px;
+    margin-top: 15px;
+    border: 2px solid #333;
+    min-height: 100px;
+
+}
+
+
+
+/* Individual Task Item */
+
+.task-item {
+
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #aaa;
+
+}
+
+
+
+/* Task Buttons */
+
+.task-item button {
+
+    margin-right: 10px;
+
+}
+
+
+
+/* -------- Tablet Responsive -------- */
+
+@media (max-width: 768px) {
+
+
+    main {
+
+        padding: 15px;
+        margin: 10px;
+
+    }
+
+
+    form {
+
+        width: 100%;
+
+    }
+
+
+}
+
+
+
+/* -------- Mobile Responsive -------- */
+
+@media (max-width: 480px) {
+
+
+    header {
+
+        text-align: center;
+
+    }
+
+
+    input,
+    select,
+    button {
+
+        width: 100%;
+
+    }
+
+
+    main {
+
+        padding: 10px;
+
+    }
+
+
+}

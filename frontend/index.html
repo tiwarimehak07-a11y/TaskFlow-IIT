@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>TaskFlow</h1>
+        <p>AI-Assisted Task Management Platform</p>
+    </header>
+
+
+    <main>
+
+        <!-- Add Task Section -->
+        <section>
+
+            <h2>Add New Task</h2>
+
+            <form id="taskForm">
+
+              <input 
+    id="title" 
+    type="text"
+    placeholder="Task title"
+    required
+>
+
+                <span id="titleError"></span>
+
+
+                <input 
+                    id="description"
+                    type="text"
+                    placeholder="Description"
+                >
+
+
+                <select id="priority">
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                    <option value="medium">
+                        Medium
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                </select>
+
+
+
+                <select id="status">
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="in progress">
+                        In Progress
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+
+
+                <input 
+                    id="due_date"
+                    type="text"
+                    placeholder="Due date"
+                >
+
+
+
+                <select id="project">
+
+                    <option value="">
+                        Select Project
+                    </option>
+
+                </select>
+
+
+
+                <button type="submit">
+                    Add Task
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- Edit Task Section -->
+
+        <section id="editSection" style="display:none;">
+
+
+            <h2>Edit Task</h2>
+
+
+            <form id="editForm">
+
+
+                <input 
+                    id="editTitle"
+                    placeholder="Task title"
+                >
+
+
+                <input 
+                    id="editDescription"
+                    placeholder="Description"
+                >
+
+
+
+                <select id="editPriority">
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                    <option value="medium">
+                        Medium
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                </select>
+
+
+
+
+                <select id="editStatus">
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="in progress">
+                        In Progress
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+
+
+
+                <input 
+                    id="editDueDate"
+                    placeholder="Due date"
+                >
+
+
+
+                <button type="submit">
+                    Update Task
+                </button>
+
+
+            </form>
+
+
+        </section>
+
+
+
+
+
+        <!-- Task List Section -->
+
+        <section>
+
+            <h2>All Tasks</h2>
+
+
+            <div id="tasks">
+                Loading tasks...
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
