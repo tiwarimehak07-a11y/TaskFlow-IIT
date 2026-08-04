@@ -1,8 +1,15 @@
+from turtle import title
+
 from sqlalchemy.orm import Session
 import models
+from algorithms import (
+    insertion_sort,
+    binary_search,
+    linear_search
+)
 import schemas
 from auth import hash_password, verify_password
-from algorithms import insertion_sort
+from algorithms import binary_search, insertion_sort, linear_search
 
 
 # -------------------------
@@ -134,7 +141,6 @@ def create_task(
 
     return db_task
 
-
 def get_tasks(
     db: Session,
     sort: str = None,
@@ -158,9 +164,31 @@ def get_tasks(
 
     tasks = query.all()
 
-    # Sorting
+    # Use our own insertion sort
     if sort == "priority":
-        tasks = insertion_sort(tasks)
+
+        records = []
+
+        for task in tasks:
+
+            records.append({
+                "id": task.id,
+                "title": task.title,
+                "description": task.description,
+                "status": task.status,
+                "priority": task.priority,
+                "priority_rank": {
+                    "low": 1,
+                    "medium": 2,
+                    "high": 3
+                }[task.priority],
+                "due_date": task.due_date,
+                "project_id": task.project_id
+            })
+
+        insertion_sort(records, "priority_rank")
+
+        return records
 
     return tasks
 
@@ -223,3 +251,63 @@ def get_task_statistics(db: Session):
     )
 
     return statistics
+
+def search_task(
+    db: Session,
+    title: str,
+    algo: str = "binary"
+):
+
+    tasks = db.query(models.Task).all()
+
+    print("TOTAL TASKS:", len(tasks))
+
+    records = []
+
+    for task in tasks:
+
+        print("DB TITLE:", repr(task.title))
+
+        records.append(
+            {
+                "id": task.id,
+                "title": task.title
+            }
+        )
+
+
+
+    if algo == "linear":
+
+        index = linear_search(
+            records,
+            title,
+            "title"
+        )
+
+    else:
+
+        insertion_sort(
+            records,
+            "title"
+        )
+
+        print("SORTED RECORDS:", records)
+        print("SEARCHING FOR:", title)
+
+        index = binary_search(
+            records,
+            title,
+            "title"
+        )
+
+    print("FOUND INDEX:", index)
+    
+    if index == -1:
+        return None
+
+    task_id = records[index]["id"]
+
+    return db.query(models.Task).filter(
+        models.Task.id == task_id
+    ).first()

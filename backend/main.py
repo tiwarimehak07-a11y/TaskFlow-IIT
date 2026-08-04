@@ -265,14 +265,13 @@ def delete_project(
 )
 def create_task(
     task: schemas.TaskCreate,
-    db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    db: Session = Depends(get_db)
 ):
 
     return crud.create_task(
         db,
         task,
-        current_user.id
+        1
     )
 
 
@@ -290,6 +289,27 @@ def get_tasks(
         status,
         priority
     )
+
+@app.get("/tasks/search")
+def search_task(
+    title: str,
+    algo: str = "binary",
+    db: Session = Depends(get_db)
+):
+
+    task = crud.search_task(
+        db,
+        title,
+        algo
+    )
+
+    if task is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Task not found"
+        )
+
+    return task
 
 
 @app.get(
@@ -341,6 +361,9 @@ def delete_task(
     return {
         "message": "Task deleted successfully"
     }
+
+
+#Statistics API#
 
 @app.get(
     "/statistics",
