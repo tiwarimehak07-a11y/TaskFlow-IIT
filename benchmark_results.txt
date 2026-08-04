@@ -1,0 +1,20 @@
+----------------------
+DATA SIZE: 10
+----------------------
+Insertion Sort Comparisons: 9
+Binary Search: {'index': -1, 'comparison_count': 4}
+Linear Search: {'index': -1, 'comparison_count': 10}
+
+----------------------
+DATA SIZE: 500
+----------------------
+Insertion Sort Comparisons: 31259
+Binary Search: {'index': 169, 'comparison_count': 9}
+Linear Search: {'index': 250, 'comparison_count': 251}
+
+----------------------
+DATA SIZE: 3000
+----------------------
+Insertion Sort Comparisons: 1820009
+Binary Search: {'index': 1669, 'comparison_count': 11}
+Linear Search: {'index': 250, 'comparison_count': 251}
