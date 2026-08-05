@@ -1,3 +1,15 @@
+## Installation
+
+```bash
+git clone <repository-url>
+
+cd backend
+
+pip install -r requirements.txt
+
+uvicorn main:app --reload
+```
+
 # TaskFlow
 
 A Full-Stack, AI-Assisted Task Management Platform.
@@ -236,3 +248,55 @@ It verifies:
 Run command:
 python check_algorithms.py
 All test cases pass successfully.
+
+# Section 3 — AI Quick Add
+
+## Overview
+
+TaskFlow includes an AI-assisted Quick Add feature that converts free-text task descriptions into structured task records.
+
+## Endpoint
+
+POST /tasks/quick-add
+
+## Request Body
+
+```json
+{
+  "description": "Complete backend urgent tomorrow",
+  "project_id": 1
+}
+```
+
+## Parsing Rules
+
+The parser extracts:
+
+- Task title
+- Priority
+- Due date
+
+Priority detection:
+
+- "urgent", "asap" → high
+- "whenever", "low priority" → low
+- otherwise → medium
+
+Due date detection:
+
+- "today"
+- "tomorrow"
+
+The generated task is automatically saved into the database and linked with the authenticated user.
+
+## API Documentation
+
+Swagger UI:
+
+http://127.0.0.1:8000/
+
+## Future Improvements
+
+- Notifications
+- Email reminders
+- AI task categorization
