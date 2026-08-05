@@ -303,3 +303,5 @@ http://127.0.0.1:8000/
 - Notifications
 - Email reminders
 - AI task categorization
+
+Last updated for final submission.
