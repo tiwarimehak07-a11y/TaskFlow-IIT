@@ -1,10 +1,20 @@
 ## AUTHOR ##
 MEHAK
 
-## Installation
+## Installation & Running the Project
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/tiwarimehak07-a11y/TaskFlow-IIT.git
+
+cd TaskFlow-IIT
+
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Linux/macOS
+source venv/bin/activate
 
 cd backend
 
@@ -12,6 +22,9 @@ pip install -r requirements.txt
 
 uvicorn main:app --reload
 ```
+
+Frontend:
+Open the `frontend/index.html` file in your browser or serve it using a local web server.
 
 # TaskFlow
 
@@ -105,13 +118,271 @@ GET /tasks/{task_id}
 PUT /tasks/{task_id}
 DELETE /tasks/{task_id}
 
-
 Additional features:
 
 - Filter tasks by status
 - Filter tasks by priority
 - Task statistics API
 - Custom request logging middleware
+
+### Create Task
+
+POST /tasks
+
+Request:
+
+```json
+{
+  "title": "Complete Backend",
+  "description": "Section B testing",
+  "status": "pending",
+  "priority": "high",
+  "due_date": "2026-08-10",
+  "project_id": 1
+}
+```
+
+Response:
+
+```json
+{
+  "id": 1,
+  "title": "Complete Backend",
+  "description": "Section B testing",
+  "status": "pending",
+  "priority": "high",
+  "due_date": "2026-08-10",
+  "project_id": 1
+}
+```
+
+API Examples
+Authentication
+Signup
+
+POST /signup
+
+Request
+
+{
+  "name": "Mehak",
+  "email": "mehak0706@gmail.com",
+  "password": "123456"
+}
+
+Response
+
+{
+  "id": 1,
+  "name": "Mehak",
+  "email": "mehak0706@gmail.com"
+}
+Login
+
+POST /login
+
+Request
+
+username: mehak0706@gmail.com
+password: 123456
+
+Response
+
+{
+  "access_token": "<jwt_token>",
+  "token_type": "bearer"
+}
+Project API
+Create Project
+
+POST /projects
+
+Request
+
+{
+  "name": "TaskFlow",
+  "owner_id": 1
+}
+
+Response
+
+{
+  "id": 1,
+  "name": "TaskFlow",
+  "owner_id": 1
+}
+List Projects
+
+GET /projects
+
+Response
+
+[
+  {
+    "id": 1,
+    "name": "TaskFlow",
+    "owner_id": 1
+  }
+]
+Task API
+Create Task
+
+POST /tasks
+
+Request
+
+{
+  "title": "Complete Backend",
+  "description": "Section B testing",
+  "status": "pending",
+  "priority": "high",
+  "due_date": "2026-08-10",
+  "project_id": 1
+}
+
+Response
+
+{
+  "id": 1,
+  "title": "Complete Backend",
+  "description": "Section B testing",
+  "status": "pending",
+  "priority": "high",
+  "due_date": "2026-08-10",
+  "project_id": 1
+}
+List Tasks
+
+GET /tasks
+
+Response
+
+[
+  {
+    "id": 1,
+    "title": "Complete Backend",
+    "status": "pending",
+    "priority": "high"
+  }
+]
+Get Task by ID
+
+GET /tasks/1
+
+Response
+
+{
+  "id": 1,
+  "title": "Complete Backend",
+  "status": "pending",
+  "priority": "high"
+}
+Update Task
+
+PUT /tasks/1
+
+Request
+
+{
+  "title": "Complete Backend Updated",
+  "description": "Updated description",
+  "status": "completed",
+  "priority": "medium",
+  "due_date": "2026-08-12",
+  "project_id": 1
+}
+
+Response
+
+{
+  "id": 1,
+  "title": "Complete Backend Updated",
+  "status": "completed",
+  "priority": "medium"
+}
+Delete Task
+
+DELETE /tasks/1
+
+Response
+
+{
+  "message": "Task deleted successfully"
+}
+Task Statistics
+
+GET /statistics
+
+Response
+
+[
+  {
+    "project_id": 1,
+    "total_tasks": 5
+  }
+]
+Sorted Tasks
+
+GET /tasks?sort=priority
+
+Response
+
+[
+  {
+    "id": 1,
+    "title": "Complete Backend",
+    "priority": "high",
+    "priority_rank": 3
+  }
+]
+Search Tasks
+
+GET /tasks/search?title=Complete Backend&algo=binary
+
+Response
+
+{
+  "id": 1,
+  "title": "Complete Backend",
+  "priority": "high"
+}
+AI Quick Add
+
+POST /tasks/quick-add
+
+Request
+
+{
+  "description": "Complete backend urgent tomorrow",
+  "project_id": 1
+}
+
+Response
+
+{
+  "message": "Quick task created successfully",
+  "task": {
+    "title": "Complete backend",
+    "priority": "high",
+    "due_date": "tomorrow"
+  }
+}
+Also add these two sections at the end of your Section 3.
+Prompting Technique Rationale
+
+## Prompting Technique Rationale
+
+The AI Quick Add feature uses a deterministic rule-based parser instead of an external Large Language Model. The parser analyzes keywords in the user's task description to determine task priority, due date, and task title. This approach requires no API keys, no internet connection, produces deterministic outputs, and fully satisfies the project requirement for an offline mock parser.
+Worked Examples
+## Worked Examples
+
+| User Input | Generated Title | Priority | Due Date |
+|------------|-----------------|----------|----------|
+| Complete backend urgent tomorrow | Complete backend | High | tomorrow |
+| Finish report asap | Finish report | High | None |
+| Buy groceries today | Buy groceries | Medium | today |
+| Learn Docker whenever | Learn Docker | Low | None |
+| Submit assignment | Submit assignment | Medium | None |
 
 ## Frontend Features
 
@@ -123,6 +394,7 @@ Frontend provides:
 - Delete task
 - Project selection
 - Backend API integration using Fetch API
+
 
 # Section 2 — Integrated Algorithms Engine
 
@@ -296,7 +568,7 @@ The generated task is automatically saved into the database and linked with the 
 
 Swagger UI:
 
-http://127.0.0.1:8000/
+http://127.0.0.1:8000/docs
 
 ## Future Improvements
 
