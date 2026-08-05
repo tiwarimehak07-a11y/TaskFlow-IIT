@@ -1,5 +1,5 @@
 ## AUTHOR ##
-MEHAKs
+MEHAK
 
 ## Installation
 
