@@ -263,15 +263,21 @@ def delete_project(
     response_model=schemas.TaskResponse,
     status_code=201
 )
+@app.post(
+    "/tasks",
+    response_model=schemas.TaskResponse,
+    status_code=201
+)
 def create_task(
     task: schemas.TaskCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
 ):
 
     return crud.create_task(
         db,
         task,
-        1
+        current_user.id
     )
 
 
@@ -310,6 +316,28 @@ def search_task(
         )
 
     return task
+
+@app.post(
+    "/tasks/quick-add",
+    response_model=schemas.QuickTaskResponse
+)
+def quick_add(
+    request: schemas.QuickTaskRequest,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
+):
+
+    task = crud.quick_add_task(
+        db=db,
+        description=request.description,
+        project_id=request.project_id,
+        user_id=current_user.id
+    )
+
+    return {
+        "message": "Quick task created successfully",
+        "task": task
+    }
 
 
 @app.get(

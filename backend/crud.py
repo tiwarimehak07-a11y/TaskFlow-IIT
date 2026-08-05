@@ -1,16 +1,9 @@
-from turtle import title
-
+from quick_add import parse_task
 from sqlalchemy.orm import Session
 import models
-from algorithms import (
-    insertion_sort,
-    binary_search,
-    linear_search
-)
+from algorithms import insertion_sort, linear_search, binary_search
 import schemas
 from auth import hash_password, verify_password
-from algorithms import binary_search, insertion_sort, linear_search
-
 
 # -------------------------
 # USER CRUD
@@ -186,8 +179,8 @@ def get_tasks(
                 "project_id": task.project_id
             })
 
-        insertion_sort(records, "priority_rank")
-
+        insertion_sort(records, "priority_rank") 
+        
         return records
 
     return tasks
@@ -251,6 +244,31 @@ def get_task_statistics(db: Session):
     )
 
     return statistics
+
+def quick_add_task(
+    db: Session,
+    description: str,
+    project_id: int,
+    user_id: int
+):
+
+    parsed = parse_task(description)
+
+    task = models.Task(
+        title=parsed["title"],
+        description=description,
+        status="pending",
+        priority=parsed["priority"],
+        due_date=parsed["due_date"],
+        project_id=project_id,
+        user_id=user_id
+    )
+
+    db.add(task)
+    db.commit()
+    db.refresh(task)
+
+    return task
 
 def search_task(
     db: Session,

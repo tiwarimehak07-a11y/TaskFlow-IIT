@@ -64,12 +64,8 @@ class TaskCreate(BaseModel):
         description="Task priority"
     )
 
-
     due_date: Optional[str] = None
-
     project_id: int
-
-
 
     @field_validator("title")
     @classmethod
@@ -80,6 +76,9 @@ class TaskCreate(BaseModel):
 
         return value
 
+class QuickTaskRequest(BaseModel):
+     description: str
+     project_id: int
 
 
 class TaskResponse(TaskCreate):
@@ -91,6 +90,9 @@ class TaskResponse(TaskCreate):
         "from_attributes": True
     }
 
+class QuickTaskResponse(BaseModel):
+    message: str
+    task: TaskResponse
 
 
 # -------------------------
