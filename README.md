@@ -1,3 +1,6 @@
+## AUTHOR ##
+MEHAKs
+
 ## Installation
 
 ```bash
