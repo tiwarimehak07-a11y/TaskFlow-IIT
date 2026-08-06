@@ -367,7 +367,6 @@ Response
     "due_date": "tomorrow"
   }
 }
-Also add these two sections at the end of your Section 3.
 Prompting Technique Rationale
 
 ## Prompting Technique Rationale
